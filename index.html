@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .chat-container {
+            width: 350px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: scroll;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .user-message {
+            text-align: right;
+            color: #000;
+            background-color: #e1f5fe;
+            border-radius: 10px;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .bot-message {
+            text-align: left;
+            color: #fff;
+            background-color: #009688;
+            border-radius: 10px;
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .input-box {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #009688;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00796b;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-box" id="chatBox"></div>
+        <input type="text" id="userInput" class="input-box" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userMessage = document.getElementById("userInput").value;
+            if (userMessage.trim() !== "") {
+                // Display user's message
+                var userDiv = document.createElement("div");
+                userDiv.classList.add("user-message");
+                userDiv.textContent = userMessage;
+                document.getElementById("chatBox").appendChild(userDiv);
+                
+                // Chatbot's response based on predefined rules
+                var botMessage = getBotResponse(userMessage);
+                
+                // Display bot's response
+                var botDiv = document.createElement("div");
+                botDiv.classList.add("bot-message");
+                botDiv.textContent = botMessage;
+                document.getElementById("chatBox").appendChild(botDiv);
+                
+                // Clear input field
+                document.getElementById("userInput").value = "";
+                
+                // Scroll to the bottom
+                document.getElementById("chatBox").scrollTop = document.getElementById("chatBox").scrollHeight;
+            }
+        }
+
+        function getBotResponse(userMessage) {
+    // Simple rule-based responses
+    var response = "";
+    
+    if (userMessage.toLowerCase().includes("hi") || userMessage.toLowerCase().includes("hello")) {
+        response = "Hello! How can I assist you today?";
+    } else if (userMessage.toLowerCase().includes("how are you")) {
+        response = "I'm just a bot, but I'm doing great! How about you?"
+    } else if (userMessage.toLowerCase().includes("name")) {
+        response = "I am a simple chatbot, I don't have a name, but you can call me whatever you like!";
+    } else if (userMessage.toLowerCase().includes("weather")) {
+        response = "I can't check the weather right now, but I recommend using a weather app or website!";
+    } else if (userMessage.toLowerCase().includes("help")) {
+        response = "Sure! What do you need help with? I'm here to assist you.";
+    } else if (userMessage.toLowerCase().includes("thanks") || userMessage.toLowerCase().includes("thank you")) {
+        response = "You're welcome! I'm happy to help.";
+    } else if (userMessage.toLowerCase().includes("what is your purpose")) {
+        response = "My purpose is to assist you and provide helpful responses based on your queries!";
+    } else if (userMessage.toLowerCase().includes("joke")) {
+        response = "Why don’t skeletons fight each other? They don’t have the guts!";
+    } else if (userMessage.toLowerCase().includes("time")) {
+        let currentTime = new Date().toLocaleTimeString();
+        response = `The current time is ${currentTime}.`;
+    } else if (userMessage.toLowerCase().includes("date")) {
+        let currentDate = new Date().toLocaleDateString();
+        response = `Today's date is ${currentDate}.`;
+    } else if (userMessage.toLowerCase().includes("good morning")) {
+        response = "Good morning! Have a wonderful day ahead!";
+    } else if (userMessage.toLowerCase().includes("good night")) {
+        response = "Good night! Sleep well!";
+    } else if (userMessage.toLowerCase().includes("how old are you")) {
+        response = "I don't have an age like humans do, but I was created recently!";
+    } else if (userMessage.toLowerCase().includes("love")) {
+        response = "Love is a beautiful feeling. Spread kindness and love!";
+    } else if (userMessage.toLowerCase().includes("food")) {
+        response = "I don't eat, but I think you might enjoy a pizza or a salad!";
+    } else if (userMessage.toLowerCase().includes("music")) {
+        response = "Music is amazing! Do you have a favorite genre?";
+    } else if (userMessage.toLowerCase().includes("movie")) {
+        response = "I don't watch movies, but I can recommend some! What type of movies do you like?";
+    } else if (userMessage.toLowerCase().includes("sports")) {
+        response = "I don't play sports, but I know lots of people enjoy football, basketball, and tennis!";
+    } else if (userMessage.toLowerCase().includes("computer")) {
+        response = "Computers are great! They help us solve problems, work, and have fun.";
+    } else if (userMessage.toLowerCase().includes("problem")) {
+        response = "I'm here to help! Please tell me about your problem, and I'll try to assist you.";
+    } else if (userMessage.toLowerCase().includes("question")) {
+        response = "Feel free to ask any questions! I'll do my best to help you.";
+    } else if (userMessage.toLowerCase().includes("what can you do")) {
+        response = "I can answer questions, tell jokes, provide information, and much more! Just ask!";
+    } else if (userMessage.toLowerCase().includes("story")) {
+        response = "Once upon a time, there was a chatbot who loved to help people. The end.";
+    } else if (userMessage.toLowerCase().includes("tell me something interesting")) {
+        response = "Did you know that honey never spoils? Archaeologists have found pots of honey in ancient tombs that are still edible!";
+    } else if (userMessage.toLowerCase().includes("bye")) {
+        response = "Goodbye! Have a great day!";
+    } else {
+        response = "Sorry, I don't understand that. Can you ask something else?";
+    }
+    
+    
+    return response;
+}
+    </script>
+</body>
+</html>
